@@ -38,7 +38,7 @@ class NW{
   /*POST*/
   static Future<String> POST(String api, Map<String, String> params) async{
     var uri = Uri.https(BASE,api);
-    var response = await post(uri, headers: headers);
+    var response = await post(uri, headers: headers, body: jsonEncode(params));
     if(response.statusCode == 200 || response.statusCode == 201){
       return response.body;
     }
@@ -75,9 +75,9 @@ class NW{
   static Map<String, String> paramEmpCreate(EmpCreate empCreate){
     Map<String, String> params = new Map();
     params.addAll({
-      "name" : empCreate.name,
-      "salary" : empCreate.salary.toString(),
-      "age" : empCreate.age.toString(),
+      'name' : empCreate.name,
+      'salary' : empCreate.salary.toString(),
+      'age' : empCreate.age.toString(),
     });
     return params;
   }

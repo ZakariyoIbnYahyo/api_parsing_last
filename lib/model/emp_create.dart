@@ -1,8 +1,8 @@
 class EmpCreate{
   int id;
   String name;
-  int salary;
-  int age;
+  String salary;
+  String age;
 
   EmpCreate({this.id, this.name, this.salary, this.age});
 
@@ -13,9 +13,9 @@ class EmpCreate{
     age = json['age'];
 
   Map<String, dynamic> toJson() => {
-    'id': id.toString(),
+    'id': id,
     'name': name,
-    'salary': salary.toString(),
-    'age': age.toString(),
+    'salary': salary,
+    'age': age,
    };
   }

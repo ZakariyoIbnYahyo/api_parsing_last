@@ -16,8 +16,8 @@ class _CreatePageState extends State<CreatePage> {
   String name;
   int age,salary;
 
-  void _apiEmpCreate(EmpCreate empCreate){
-    NW.POST(NW.API_EMP_CREATE, NW.paramEmpCreate(empCreate)).then((response) =>{
+  void _apiEmpCreate(EmpCreate empCreat){
+    NW.POST(NW.API_EMP_CREATE, NW.paramEmpCreate(empCreat)).then((response) =>{
       _showResponse(response),
       print(response),
     });
@@ -27,9 +27,6 @@ class _CreatePageState extends State<CreatePage> {
     EmpRealCreate empRealCreate = NW.parseEmpCreate(response);
     setState(() {
       infos = empRealCreate.data;
-      name = empRealCreate.data.name;
-      age = empRealCreate.data.age;
-      salary = empRealCreate.data.salary;
       status = empRealCreate.status;
       message = empRealCreate.message;
     });
@@ -39,7 +36,7 @@ class _CreatePageState extends State<CreatePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var empC = new EmpCreate(id: 2, name: "test", salary: 5000, age: 28 );
+    var empC = new EmpCreate(id: 2, name: "test", salary: "5000", age: "28" );
     _apiEmpCreate(empC);
   }
 
@@ -50,14 +47,16 @@ class _CreatePageState extends State<CreatePage> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Status: $status", style: TextStyle(fontSize: 24),),
-              Text("Message: $message", style: TextStyle(fontSize: 24),),
+            children:[
+              Text("Status: $status", style: TextStyle(fontSize: 16),),
+              SizedBox(height: 10,),
               Text("ID: " + infos.id.toString(), style: TextStyle(fontSize: 24),),
-              Text("Name: $name"),
-              Text("Age: $age"),
-              Text("Salary: $salary"),
-
+              SizedBox(height: 10,),
+              Text(infos.name+"("+infos.age.toString()+")",style: TextStyle(color: Colors.black,fontSize: 24),),
+              SizedBox(height: 10,),
+              Text(infos.salary.toString()+"\$",style: TextStyle(color: Colors.black,fontSize: 22),),
+              SizedBox(height: 10,),
+              Text("Message: $message", style: TextStyle(fontSize: 16),),
             ],
           ),
         ),
